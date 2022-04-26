@@ -5,13 +5,13 @@
 ** Your will need <a href="https://nodejs.dev/">nodejs and npm</a> and <a href="https://ffmpeg.org/">ffmpeg</a> to run this server **
 1. `npm install`
 2. `node server/bin.js`
-3. Send all requests to [http://localhost:8080/](http://localhost:8080)
+3. Send all requests to [http://localhost:9000/](http://localhost:9000)
 4. All torrents will be temporarily downloaded in to temp directory ( not tested what happens when storage full )
 
 ## To change server port change this varible (from server/bin.js) value to any port you want
 
 ```JS
-    var port = 8080;
+    var port = 9000;
 ```
 ## API Usage
 

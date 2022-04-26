@@ -65,7 +65,7 @@ function findTorrent(req, res, next) {
 }
 
 api.get('/', function (req, res) {
-  fs.readFile(`${__dirname}/html/index.html`)
+  fs.readFile(`/html/index.html`)
     .then(contents => {
         res.setHeader("Content-Type", "text/html");
         res.writeHead(200);
