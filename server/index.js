@@ -64,20 +64,6 @@ function findTorrent(req, res, next) {
   next();
 }
 
-api.get('/', function (req, res) {
-  fs.readFile('/html/index.html')
-    .then(contents => {
-        res.setHeader("Content-Type", "text/html");
-        res.writeHead(200);
-        res.end(contents);
-    })
-    .catch(err => {
-        res.writeHead(500);
-        res.end(err);
-        return;
-    });
-});
-
 api.get('/torrents', function (req, res) {
   res.send(store.list().map(serialize));
 });
