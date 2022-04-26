@@ -123,8 +123,7 @@
       beforeSend:function(){ 
       },
       success:function(data){
-        var torrents = data.reverse()
-        torrents.forEach(constructSingleTorrent)
+        data.forEach(constructSingleTorrent)
       }
     });
   }
