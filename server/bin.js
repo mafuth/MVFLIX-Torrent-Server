@@ -13,7 +13,7 @@ var express = require('express'),
   socket = require('./socket'),
   api = require('.')
     .use(serveStatic(path.join(__dirname, '../temp'), STATIC_OPTIONS))
-    .use(serveStatic(path.join(__dirname, '../app'), STATIC_OPTIONS));
+    .use(serveStatic(path.join(__dirname, '../html'), STATIC_OPTIONS));
 
 var server = http.createServer(api);
 socket(server);
