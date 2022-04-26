@@ -11,12 +11,12 @@ var express = require('express'),
   path = require('path'),
   serveStatic = require('serve-static'),
   socket = require('./socket'),
-  api = require('./')
+  api = require('.')
     .use(serveStatic(path.join(__dirname, 'temp/'), STATIC_OPTIONS));
 
 var server = http.createServer(api);
 socket(server);
-var port = 8080;
+var port = 9000;
 
 server.listen(port).on('error', function (e) {
   if (e.code !== 'EADDRINUSE' && e.code !== 'EACCES') {

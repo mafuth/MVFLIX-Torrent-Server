@@ -65,7 +65,12 @@ function findTorrent(req, res, next) {
 }
 
 api.get('/', function (req, res) {
-  res.send({help: 'https://github.com/mafuth/MVFLIX-Torrent-Server/blob/main/README.md'});
+  fs.readFile(`${__dirname}/html/index.html`)
+    .then(contents => {
+        res.setHeader("Content-Type", "text/html");
+        res.writeHead(200);
+        res.end(contents);
+    })
 });
 
 api.get('/torrents', function (req, res) {
