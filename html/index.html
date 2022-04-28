@@ -33,21 +33,37 @@
 
   <div class="row justify-content-center mt-3">
 
-    <div class="col-md-6">
+    <div class="col-md-12">
       <div class="card bg-light">
         <div class="text-center mb-3 mt-3">
           <h1>MVFLIX Torrent API Server</h1>
         </div>
         <div class="container mt-3">
-          <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">Torrent</span>
-            <input type="text" class="form-control url" placeholder="magnet:?..." aria-label="magnet:?..." aria-describedby="magnet:?...">
-          </div>
-          <div class="input-group mb-3">
-            <button class="btn btn-success download"><i class="bi bi-cloud-arrow-down-fill"></i> Download</button>
-          </div>
-          <div class="input-group mb-3">
-            <button class="btn btn-warning loading hidden"><i class="bi bi-arrow-repeat"></i> Loading torrent info</button>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Torrent</span>
+                <input type="text" class="form-control url" placeholder="magnet:?..." aria-label="magnet:?..." aria-describedby="magnet:?...">
+              </div>
+              <div class="input-group mb-3">
+                <button class="btn btn-success download"><i class="bi bi-cloud-arrow-down-fill"></i> Download</button>
+              </div>
+              <div class="input-group mb-3">
+                <button class="btn btn-warning loading hidden"><i class="bi bi-arrow-repeat"></i> Loading torrent info</button>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">IMDB ID</span>
+                <input type="text" class="form-control url" placeholder="tt..." aria-label="magnet:?..." aria-describedby="magnet:?...">
+              </div>
+              <div class="input-group mb-3">
+                <button class="btn btn-success download-imdb"><i class="bi bi-cloud-arrow-down-fill"></i> Download</button>
+              </div>
+              <div class="input-group mb-3">
+                <button class="btn btn-warning loading-imdb hidden"><i class="bi bi-arrow-repeat"></i> Loading torrent info</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
