@@ -74,6 +74,16 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
+  const getMobileOS = () => {
+    const ua = navigator.userAgent
+    if (/android/i.test(ua)) {
+      return "Android"
+    }
+    else if (/iPad|iPhone|iPod/.test(ua)){
+      return "iOS"
+    }
+    return "Other"
+  }
   function bytesToMegaBytes(bytes, roundTo) {
     var converted = bytes / (1024*1024);
     return roundTo ? converted.toFixed(roundTo) : converted;
@@ -81,11 +91,20 @@
   function constructSingleFile(item, index){
     if(item['name'].endsWith('.mp4') || item['name'].endsWith('.mkv') || item['name'].endsWith('.avi'))
     {
-      $('.files:last').append(
-      '<li class="list-group-item">'+
-        '<a class="float-start" href="'+item['download']+'"> '+item['name']+' ( '+bytesToMegaBytes(item['length'],2)+' MB )</a>'+
-        '<a class="btn btn-success float-end" href="'+item['stream']+'"><i class="bi bi-film"></i> Stream</a>'+
-      '</li>')
+      var os = getMobileOS();
+      if(os == "iOS"){
+        $('.files:last').append(
+        '<li class="list-group-item">'+
+          '<a class="float-start" href="'+item['download']+'"> '+item['name']+' ( '+bytesToMegaBytes(item['length'],2)+' MB )</a>'+
+          '<a class="btn btn-success float-end" href="vlc-x-callback://x-callback-url/ACTION?url='+item['stream']+'"><i class="bi bi-film"></i> Stream</a>'+
+        '</li>')
+      }else{
+        $('.files:last').append(
+        '<li class="list-group-item">'+
+          '<a class="float-start" href="'+item['download']+'"> '+item['name']+' ( '+bytesToMegaBytes(item['length'],2)+' MB )</a>'+
+          '<a class="btn btn-success float-end" href="'+item['stream']+'"><i class="bi bi-film"></i> Stream</a>'+
+        '</li>')
+      }
     }
     else{
       $('.files:last').append(
