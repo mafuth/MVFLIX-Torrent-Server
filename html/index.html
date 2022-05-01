@@ -97,7 +97,7 @@
         $('.files:last').append(
         '<li class="list-group-item">'+
           '<a class="float-start" href="'+item['download']+'"> '+item['name']+' ( '+bytesToMegaBytes(item['length'],2)+' MB )</a>'+
-          '<a class="btn btn-success float-end" href="vlc-x-callback://x-callback-url/ACTION?url=http://'+host+''+item['stream']+'"><i class="bi bi-film"></i> Stream</a>'+
+          '<a class="btn btn-success float-end" href="vlc-x-callback://x-callback-url/ACTION?url=http://'+host+''+item['download']+'"><i class="bi bi-film"></i> Stream</a>'+
         '</li>')
       }else{
         $('.files:last').append(
