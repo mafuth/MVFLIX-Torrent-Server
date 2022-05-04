@@ -8,14 +8,13 @@ module.exports = function (req, res, torrent, file) {
   var param = req.query.ffmpeg,
     ffmpeg = require('fluent-ffmpeg');
 
-  res.type('video/mp4');
+  res.type('video/webm');
   var command = ffmpeg(file.createReadStream())
+    .videoCodec('libvpx').audioCodec('libvorbis').format('webm')
+    .audioBitrate(128)
+    .videoBitrate(1024)
     .outputOptions([
-      '-c:v libx264',
-      '-g 52',
-      '-movflags frag_keyframe+empty_moov',
-      '-f mp4',
-      '-threads 20',
+      //'-threads 2',
       '-deadline realtime',
       '-error-resilient 1'
     ])
