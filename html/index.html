@@ -94,13 +94,13 @@
       var os = getMobileOS();
       var host = window.location.host;
       if(os == "iOS"){
-        $('.files:last').append(
+        $('.files:first').append(
         '<li class="list-group-item">'+
           '<a class="float-start" href="'+item['download']+'"> '+item['name']+' ( '+bytesToMegaBytes(item['length'],2)+' MB )</a>'+
           '<a class="btn btn-success float-end" href="vlc-x-callback://x-callback-url/ACTION?url=http://'+host+''+item['download']+'"><i class="bi bi-film"></i> Stream</a>'+
         '</li>')
       }else{
-        $('.files:last').append(
+        $('.files:first').append(
         '<li class="list-group-item">'+
           '<a class="float-start" href="'+item['download']+'"> '+item['name']+' ( '+bytesToMegaBytes(item['length'],2)+' MB )</a>'+
           '<a class="btn btn-success float-end" href="'+item['stream']+'"><i class="bi bi-film"></i> Stream</a>'+
@@ -108,7 +108,7 @@
       }
     }
     else{
-      $('.files:last').append(
+      $('.files:first').append(
       '<li class="list-group-item">'+
         '<a class="float-start" href="'+item['download']+'"> '+item['name']+' ( '+bytesToMegaBytes(item['length'],2)+' MB )</a>'+
         '<a class="btn btn-primary float-end" href="'+item['download']+'"><i class="bi bi-download"></i> Download</a>'+
@@ -119,7 +119,7 @@
   function constructSingleTorrent(item, index){
     $('.no-tor').hide();
     var hash = "'"+item['infoHash']+"'";
-    $('.torrents').append(
+    $('.torrents').prepend(
       '<div class="card bg-light mt-3 torrent-'+item['infoHash']+'">'+
         '<div class="card-header">'+
           '<p class="float-start"> '+item['name']+'</p>'+
