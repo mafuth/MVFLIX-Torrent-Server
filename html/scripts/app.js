@@ -1,7 +1,7 @@
 'use strict';
 
 angular
-  .module('MVFlix-torrent-server-app', [
+  .module('peerflixServerApp', [
     'ngCookies',
     'ngResource',
     'ngSanitize',
