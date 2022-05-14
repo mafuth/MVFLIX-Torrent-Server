@@ -1,7 +1,7 @@
 'use strict';
 
 /* global Push */
-angular.module('MVFlix-torrent-server-app')
+angular.module('peerflixServerApp')
   .controller('MainCtrl', function ($scope, $resource, $log, $q, $upload, torrentSocket) {
     var Torrent = $resource('/torrents/:infoHash');
 
