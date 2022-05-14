@@ -1,0 +1,118 @@
+<div class="header">
+  <ul class="nav nav-pills pull-right">
+    <li class="active"><a href="">Torrents</a></li>
+    <li>
+      <a href="https://github.com/mafuth/MVFLIX-Torrent-Server" target="_blank">
+        <i class="fa fa-github"></i> About</a>
+    </li>
+  </ul>
+  <h3 class="text-muted text-nowrap"><img src="https://mvflix.stream/pwa/icon.png" alt="logo" height="40"> MVFlix torrent server</h3>
+</div>
+
+<div class="jumbotron" ng-file-drop ng-file-change="upload($files)">
+  <h1>Stream Torrents</h1>
+  <div class="form-group">
+    <div class="input-group">
+      <span class="input-group-addon">torrent:</span>
+      <input type="text" class="form-control" placeholder="Torrent or magnet link or hash" ng-model="link" ng-keypress="keypress($event)">
+    </div>
+  </div>
+  <a class="btn btn-success" href="" ng-click="download()">
+    <span class="fa fa-cloud-download"></span>
+    Download
+  </a>
+  <p class="text-right">
+    <i class="fa fa-upload"></i>
+    Drop .torrent files here or
+    <span class="btn-link" ng-file-select ng-file-change="upload($files)">
+      browse to upload
+    </span>
+  </p>
+</div>
+
+<div ng-if="!torrents.length" class="alert alert-info" role="alert">
+  <i class="fa fa-film"></i> Go get some torrents to watch!
+</div>
+
+<div class="row content">
+  <div ng-repeat="torrent in torrents" class="panel panel-default" ng-class="{ 'panel-warning': !torrent.ready, 'panel-success': torrent.interested }">
+    <div class="panel-heading">
+      <button type="button" class="close" ng-click="remove(torrent)">&times;</button>
+      <span class="fa" ng-class="{
+        'fa-cloud-upload': torrent.ready && !torrent.interested,
+        'fa-refresh fa-spin': !torrent.ready,
+        'fa-exchange': torrent.interested }">
+      </span>
+      <span ng-if="!torrent.name">Fetching metadata...</span>
+      {{ torrent.name }}
+    </div>
+    <div class="panel-body">
+      <div class="progress progress-striped" ng-class="{ active: torrent.interested }">
+        <div ng-class-even="'space'" ng-class-odd="'progress-bar progress-bar-success'"
+             ng-repeat="progress in torrent.progress track by $index" ng-style="{ width: progress + '%' }"></div>
+      </div>
+      <ul class="list-group">
+        <li class="list-group-item list-group-item-header" ng-if="torrent.files.length > 1">
+          <label class="list-group-item-heading text-nowrap">
+            <input type="checkbox" ng-model="torrent.selected" ng-click="selectAll(torrent)"/>
+            <span class="fa fa-cloud-download"></span>
+            All {{ torrent.files.length }} files ({{ torrent.length / 1024 / 1024 | number:1 }} MB)
+          </label><span>&nbsp;&mdash;</span>
+          <span class="list-group-item-text text-nowrap">
+            Download as
+            <a ng-href="/torrents/{{ torrent.infoHash }}/archive" target="_blank">
+              <span class="fa fa-file-zip-o"></span> archive
+            </a>
+            or
+            <a ng-href="/torrents/{{ torrent.infoHash }}/files" target="_blank">
+              <span class="fa fa-play-circle-o"></span> playlist
+            </a>
+          </span>
+        </li>
+        <li class="list-group-item text-nowrap" ng-repeat="file in torrent.files">
+          <input type="checkbox" ng-model="file.selected" ng-click="select(torrent, file)"/>
+          <span class="fa fa-cloud-download"></span>
+          <a ng-href="{{ file.link }}" target="_blank">
+            {{ file.name }} ({{ file.length / 1024 / 1024 | number:1 }} MB)
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="panel-footer">
+      <ul class="list-unstyled list-inline">
+        <li class="text-nowrap">
+          <button type="button" class="btn btn-xs" ng-click="pause(torrent)">
+            <span class="fa {{ torrent.stats.paused ? 'fa-play' : 'fa-pause' }}"></span>
+          </button>
+        </li>
+        <li class="text-nowrap" ng-show="torrent.stats">
+          <strong>Speed:</strong>
+          <span class="label label-success">{{ torrent.stats.speed.down / 1024 | number:1 }}</span> /
+          <span class="label label-danger">{{ torrent.stats.speed.up / 1024 | number:1 }}</span> KB/s
+        </li>
+        <li class="text-nowrap" ng-show="torrent.stats" ng-if="torrent.stats.traffic.down > 1 && torrent.stats.eta > 0">
+          <strong>ETA:</strong>
+          <span class="label label-primary">{{ torrent.stats.eta / 60 | number:0 }}</span> min
+        </li>
+        <li class="text-nowrap" ng-show="torrent.stats">
+          <strong>Traffic:</strong>
+          <span class="label label-success">{{ torrent.stats.traffic.down / 1024 / 1024 | number:1 }}</span> /
+          <span class="label label-danger">{{ torrent.stats.traffic.up / 1024 / 1024 | number:1 }}</span> MB
+        </li>
+        <li class="text-nowrap" ng-show="torrent.stats">
+          <strong>Peers:</strong>
+          <span class="label label-success">{{ torrent.stats.peers.unchocked | number }}</span> /
+          <span class="label label-default">{{ torrent.stats.peers.total | number }}</span>
+        </li>
+        <li class="text-nowrap" ng-show="torrent.stats">
+          <strong>Queue:</strong>
+          <span class="label label-primary">{{ torrent.stats.queue | number }}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <p><span class="fa fa-heart"></span> MV FLix</p>
+</div>
