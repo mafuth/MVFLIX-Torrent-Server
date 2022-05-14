@@ -1,7 +1,7 @@
 'use strict';
 
 angular
-  .module('peerflixServerApp', [
+  .module('MVFlix-torrent-server-app', [
     'ngCookies',
     'ngResource',
     'ngSanitize',
@@ -12,7 +12,7 @@ angular
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/main.html',
+        templateUrl: 'views/app.html',
         controller: 'MainCtrl'
       })
       .otherwise({

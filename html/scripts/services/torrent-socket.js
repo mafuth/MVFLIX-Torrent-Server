@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('peerflixServerApp')
+angular.module('MVFlix-torrent-server-app')
   .factory('torrentSocket', function (socketFactory) {
     return socketFactory();
   });

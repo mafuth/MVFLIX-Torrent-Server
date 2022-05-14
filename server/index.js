@@ -43,7 +43,7 @@ function serialize(torrent) {
       return {
         name: f.name,
         path: f.path,
-        download: '/torrents/' + torrent.infoHash + '/files/' + encodeURIComponent(f.path),
+        link: '/torrents/' + torrent.infoHash + '/files/' + encodeURIComponent(f.path),
         stream: '/torrents/' + torrent.infoHash + '/stream/' + encodeURIComponent(f.path),
         length: f.length,
         offset: f.offset,
