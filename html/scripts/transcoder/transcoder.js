@@ -23,21 +23,27 @@ function stopRunning() {
 function retrieveSampleVideo() {
   var url_string = window.location.href;
   var url = new URL(url_string);
-  var video = url.searchParams.get("stream");
-  console.log("loading from stream: " + video);
-  log.innerHTML = "<br> getting video file";
-  var oReq = new XMLHttpRequest();
-  oReq.open("GET", video, true);
-  oReq.responseType = "arraybuffer";
-  oReq.onload = function (oEvent) {
-    var arrayBuffer = oReq.response;
-    if (arrayBuffer) {
-      sampleVideoData = new Uint8Array(arrayBuffer);
-    }
-  };
-  oReq.addEventListener("progress", updateProgress);
-  oReq.addEventListener("error", transferFailed);
-  oReq.send(null);
+  var vid = url.searchParams.get("stream");
+  console.log("loading from stream: " + vid);
+  if(vid.endsWith(".mp4")){
+    log.innerHTML = "video is playable";
+    video.src = vid;
+    video.autoplay = true;
+  }else{
+    log.innerHTML = "<br>video is not playable so getting video file data for transcoding";
+    var oReq = new XMLHttpRequest();
+    oReq.open("GET", vid, true);
+    oReq.responseType = "arraybuffer";
+    oReq.onload = function (oEvent) {
+      var arrayBuffer = oReq.response;
+      if (arrayBuffer) {
+        sampleVideoData = new Uint8Array(arrayBuffer);
+      }
+    };
+    oReq.addEventListener("progress", updateProgress);
+    oReq.addEventListener("error", transferFailed);
+    oReq.send(null);
+  }
 }
 function updateProgress (oEvent) {
   if (oEvent.lengthComputable) {
