@@ -44,7 +44,7 @@ function serialize(torrent) {
         name: f.name,
         path: f.path,
         link: '/torrents/' + torrent.infoHash + '/files/' + encodeURIComponent(f.path),
-        stream: 'stream.html?stream=/torrents/' + torrent.infoHash + '/stream/' + encodeURIComponent(f.path),
+        stream: '/torrents/' + torrent.infoHash + '/stream/' + encodeURIComponent(f.path),
         length: f.length,
         offset: f.offset,
         selected: torrent.selection.some(function (s) {
