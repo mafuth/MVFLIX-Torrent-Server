@@ -6,7 +6,7 @@
 1. `npm install`
 2. `npm start`
 3. Send all requests to [http://localhost:9000/](http://localhost:9000)
-4. All torrents will be temporarily downloaded in to temp directory ( not tested what happens when storage full )
+4. All torrents will be temporarily downloaded in to temp directory ( wroks fine even when storage full )
 
 ## To change server port change this varible (from server/bin.js) value to any port you want
 
