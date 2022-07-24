@@ -3,9 +3,11 @@
 ## How setup and use <a href="http://mvflix.stream/">MVFLIX</a> Torrent Server
 
 ** If you have docker installed **
+
 `docker pull mafuth/mvflix-torrent-server:1.1`
 
 ** Your will need <a href="https://nodejs.dev/">nodejs and npm</a> and <a href="https://ffmpeg.org/">ffmpeg</a> to run this server **
+
 1. `npm install`
 2. `npm start`
 3. Send all requests to [http://localhost:9000/](http://localhost:9000)
